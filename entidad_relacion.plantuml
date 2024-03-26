@@ -1,0 +1,57 @@
+@startuml BibliotecaDigital
+
+class model.Usuario{
+    nombre:string
+    email:string
+}
+class model.Libro{
+    titulo:string
+    descripcion:text
+}
+class model.Reseña{
+    titulo:string
+    contenido:text
+}
+class model.Autor{
+    nombre:string
+    biografia:text
+}
+class model.Categoria{
+    tipoCategoria:string
+}
+
+class model.LibroReservado{
+    usuario_id:int
+    libro_id:int
+}
+model.Libro "1"--"*" model.LibroReservado
+model.LibroReservado "*"--"1" model.Usuario
+class model.LibroReseña{
+    id:int
+    reseña_id:int
+    libro_id:int
+}
+model.Libro "1"--"*" model.LibroReseña
+model.LibroReseña "1"--"1" model.Reseña
+class model.UsuarioLibroReseña{
+    libro_reseña_id:int
+    usuario_id:int
+}
+model.Usuario "1"--"1" model.UsuarioLibroReseña
+model.UsuarioLibroReseña "1"--"1" model.LibroReseña
+
+class model.AutorLibro{
+    autor_id:int
+    libro_id:int
+}
+model.Autor "1"--"*" model.AutorLibro
+model.AutorLibro "1"--"1" model.Libro
+
+class model.CategoriaLibro {
+    categoria_id:int
+    libro_id:int
+}
+model.Categoria "1"--"*" model.CategoriaLibro
+model.CategoriaLibro "*"--"1" model.Libro
+
+@enduml
